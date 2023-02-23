@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20230223195533",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "nom_lycetech",
+  "fields": [
+    {
+      "fieldName": "nomLycee",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "NomLycetech",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "apprenant",
+      "otherEntityRelationshipName": "nomLycetech",
+      "relationshipName": "apprenant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enseignant",
+      "otherEntityRelationshipName": "nomLycetech",
+      "relationshipName": "enseignant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "matiere",
+      "otherEntityRelationshipName": "nomLycetech",
+      "relationshipName": "matiere",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "nomLycetech",
+      "relationshipName": "etablissement",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "demande",
+      "otherEntityRelationshipName": "nomLycetech",
+      "relationshipName": "demande",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,61 @@
+{
+  "applications": "*",
+  "changelogDate": "20230223195536",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "demande",
+  "fields": [
+    {
+      "fieldName": "motif",
+      "fieldType": "Motif",
+      "fieldValues": "CreationMatricule,Perte"
+    },
+    {
+      "fieldName": "typeDemandeur",
+      "fieldType": "TypeDemandeur",
+      "fieldValues": "Etablissement,Enseignant,Apprenant"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Demande",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "typeEtab",
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "demande",
+      "relationshipName": "etablissement",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomLycee",
+      "otherEntityName": "nomLycetech",
+      "otherEntityRelationshipName": "demande",
+      "relationshipName": "nomLycetech",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomCFP",
+      "otherEntityName": "nomCFP",
+      "otherEntityRelationshipName": "demande",
+      "relationshipName": "nomCFP",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

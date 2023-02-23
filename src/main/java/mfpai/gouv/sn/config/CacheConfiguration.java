@@ -48,6 +48,34 @@ public class CacheConfiguration {
             createCache(cm, mfpai.gouv.sn.domain.User.class.getName());
             createCache(cm, mfpai.gouv.sn.domain.Authority.class.getName());
             createCache(cm, mfpai.gouv.sn.domain.User.class.getName() + ".authorities");
+            createCache(cm, mfpai.gouv.sn.domain.Etablissement.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.Etablissement.class.getName() + ".apprenants");
+            createCache(cm, mfpai.gouv.sn.domain.Etablissement.class.getName() + ".enseignants");
+            createCache(cm, mfpai.gouv.sn.domain.Etablissement.class.getName() + ".matieres");
+            createCache(cm, mfpai.gouv.sn.domain.Etablissement.class.getName() + ".demandes");
+            createCache(cm, mfpai.gouv.sn.domain.NomCFP.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.NomCFP.class.getName() + ".apprenants");
+            createCache(cm, mfpai.gouv.sn.domain.NomCFP.class.getName() + ".enseignants");
+            createCache(cm, mfpai.gouv.sn.domain.NomCFP.class.getName() + ".matieres");
+            createCache(cm, mfpai.gouv.sn.domain.NomCFP.class.getName() + ".etablissements");
+            createCache(cm, mfpai.gouv.sn.domain.NomCFP.class.getName() + ".demandes");
+            createCache(cm, mfpai.gouv.sn.domain.NomLycetech.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.NomLycetech.class.getName() + ".apprenants");
+            createCache(cm, mfpai.gouv.sn.domain.NomLycetech.class.getName() + ".enseignants");
+            createCache(cm, mfpai.gouv.sn.domain.NomLycetech.class.getName() + ".matieres");
+            createCache(cm, mfpai.gouv.sn.domain.NomLycetech.class.getName() + ".etablissements");
+            createCache(cm, mfpai.gouv.sn.domain.NomLycetech.class.getName() + ".demandes");
+            createCache(cm, mfpai.gouv.sn.domain.Enseignant.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.Apprenant.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.Demande.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.Matiere.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.ChefEtablissement.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.ChefEtablissement.class.getName() + ".apprenants");
+            createCache(cm, mfpai.gouv.sn.domain.ComptableMatiere.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.ComptableMatiere.class.getName() + ".matieres");
+            createCache(cm, mfpai.gouv.sn.domain.BFPA.class.getName());
+            createCache(cm, mfpai.gouv.sn.domain.BFPA.class.getName() + ".etablissements");
+            createCache(cm, mfpai.gouv.sn.domain.BFPA.class.getName() + ".enseignants");
             // jhipster-needle-ehcache-add-entry
         };
     }

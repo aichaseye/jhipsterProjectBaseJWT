@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Etablissement.
+    -->
+    <changeSet id="20230223195531-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="bfpa_id"
+                                 baseTableName="etablissement"
+                                 constraintName="fk_etablissement__bfpa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bfpa"/>
+
+        <addForeignKeyConstraint baseColumnNames="nomcfp_id"
+                                 baseTableName="etablissement"
+                                 constraintName="fk_etablissement__nomcfp_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nom_cfp"/>
+
+        <addForeignKeyConstraint baseColumnNames="nom_lycetech_id"
+                                 baseTableName="etablissement"
+                                 constraintName="fk_etablissement__nom_lycetech_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nom_lycetech"/>
+    </changeSet>
+</databaseChangeLog>

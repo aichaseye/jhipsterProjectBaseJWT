@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20230223195532",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "nom_cfp",
+  "fields": [
+    {
+      "fieldName": "nomCFP",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "NomCFP",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "apprenant",
+      "otherEntityRelationshipName": "nomCFP",
+      "relationshipName": "apprenant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enseignant",
+      "otherEntityRelationshipName": "nomCFP",
+      "relationshipName": "enseignant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "matiere",
+      "otherEntityRelationshipName": "nomCFP",
+      "relationshipName": "matiere",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "nomCFP",
+      "relationshipName": "etablissement",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "demande",
+      "otherEntityRelationshipName": "nomCFP",
+      "relationshipName": "demande",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

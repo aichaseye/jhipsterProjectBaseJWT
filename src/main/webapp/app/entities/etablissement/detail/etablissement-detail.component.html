@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="etablissement">
+      <h2 data-cy="etablissementDetailsHeading"><span>Etablissement</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ etablissement.id }}</span>
+        </dd>
+        <dt><span>Matricule Etab</span></dt>
+        <dd>
+          <span>{{ etablissement.matriculeEtab }}</span>
+        </dd>
+        <dt><span>Type Etab</span></dt>
+        <dd>
+          <span>{{ etablissement.typeEtab }}</span>
+        </dd>
+        <dt><span>Autrenom Etab</span></dt>
+        <dd>
+          <span>{{ etablissement.autrenomEtab }}</span>
+        </dd>
+        <dt><span>Annee Cre</span></dt>
+        <dd>
+          <span>{{ etablissement.anneeCre }}</span>
+        </dd>
+        <dt><span>Statut</span></dt>
+        <dd>
+          <span>{{ etablissement.statut }}</span>
+        </dd>
+        <dt><span>Region</span></dt>
+        <dd>
+          <span>{{ etablissement.region }}</span>
+        </dd>
+        <dt><span>Autre Region</span></dt>
+        <dd>
+          <span>{{ etablissement.autreRegion }}</span>
+        </dd>
+        <dt><span>Departement</span></dt>
+        <dd>
+          <span>{{ etablissement.departement }}</span>
+        </dd>
+        <dt><span>Autre Dep</span></dt>
+        <dd>
+          <span>{{ etablissement.autreDep }}</span>
+        </dd>
+        <dt><span>Commune</span></dt>
+        <dd>
+          <span>{{ etablissement.commune }}</span>
+        </dd>
+        <dt><span>Code Region</span></dt>
+        <dd>
+          <span>{{ etablissement.codeRegion }}</span>
+        </dd>
+        <dt><span>Autrecode Region</span></dt>
+        <dd>
+          <span>{{ etablissement.autrecodeRegion }}</span>
+        </dd>
+        <dt><span>Email Etab</span></dt>
+        <dd>
+          <span>{{ etablissement.emailEtab }}</span>
+        </dd>
+        <dt><span>Type Insp</span></dt>
+        <dd>
+          <span>{{ etablissement.typeInsp }}</span>
+        </dd>
+        <dt><span>B FPA</span></dt>
+        <dd>
+          <div *ngIf="etablissement.bFPA">
+            <a [routerLink]="['/bfpa', etablissement.bFPA?.id, 'view']">{{ etablissement.bFPA?.nomPrenom }}</a>
+          </div>
+        </dd>
+        <dt><span>Nom CFP</span></dt>
+        <dd>
+          <div *ngIf="etablissement.nomCFP">
+            <a [routerLink]="['/nom-cfp', etablissement.nomCFP?.id, 'view']">{{ etablissement.nomCFP?.nomCFP }}</a>
+          </div>
+        </dd>
+        <dt><span>Nom Lycetech</span></dt>
+        <dd>
+          <div *ngIf="etablissement.nomLycetech">
+            <a [routerLink]="['/nom-lycetech', etablissement.nomLycetech?.id, 'view']">{{ etablissement.nomLycetech?.nomLycee }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/etablissement', etablissement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,178 @@
+// an ignored comment
+/** not an ignored comment */
+enum TypeInspection {
+	IA, IEF  
+}
+
+entity Etablissement {
+	  matriculeEtab String unique,
+      typeEtab TypeEtab required,
+      autrenomEtab String,
+      anneeCre Integer ,
+	  statut StatutEtab ,
+      region NomReg ,
+      autreRegion String,
+      departement NomDep ,
+      autreDep String,
+      commune String ,
+      codeRegion CodeRegion ,
+      autrecodeRegion String,
+	  emailEtab String ,
+      typeInsp TypeInspection   
+}
+
+entity NomCFP {
+    nomCFP String
+}
+
+entity NomLycetech {
+nomLycee String
+} 
+
+enum NomReg {
+DAKAR, DIOURBEL, FATICK, KAFFRINE, KAOLACK, KEDOUGOU, KOLDA,
+LOUGA, MATAM, SAINT_LOUIS, SEDHIOU, TAMBACOUNDA, THIES, 
+ZIGINCHOR, AUTRE
+}
+ enum CodeRegion {
+ C01, C02, C03, C04, C05, C06, C07, C08, C09, C10,
+ C11, C12, C13, C14, Autres
+ }
+ enum NomDep{
+Dakar, Pikine, Rufisque, Guediawaye, Keur_Massar,
+Thies, Mbour, Tivaoune,
+Saint_Louis, Dagana, Podor,
+Diourbel, Mbacke, Bambey,
+Louga, Linguere, Kebemer,
+Fatick, Foundiougne, Gossas,
+Kaffrine, Birkelane, Koungheul, Malem_Hodar,
+Kaolack, Guinguineo, Nioro_du_Rip,
+Matam, Kanel, Ranerou,
+Tambacounda, Bakel, Goudiry, Koumpentoum,
+Kedougou, Salemata, Saraya,
+Kolda, Velingara, Medina_Yoro_Foulah,
+Sedhiou, Bounkiling, Goudomp,
+Ziguinchor, Bignona, Oussouye, Autre
+}
+
+enum TypeEtab {
+	LyceeTechnique, CFP 
+}
+enum StatutEtab {
+	Prive, Public , Mixte 
+}
+
+entity Enseignant {
+matriculeEns String unique,
+nom String required,
+prenom String required,
+numCI String required,
+anneeDentree String required,
+region NomReg  required,
+autreRegion String,
+codeRegion CodeRegion required,
+autrecodeRegion String,
+sexe Sexe,
+email String required unique
+
+
+}
+entity Apprenant {
+	matriculeApp String unique,
+	nom String  required,
+    prenom String  required,
+    sexe Sexe required ,
+    telephone String  required,
+	email String required  unique
+          
+}
+
+enum Sexe {
+	M, F  
+}
+
+entity Demande {
+      motif Motif,
+	  typeDemandeur TypeDemandeur,
+	  nom String ,
+	  prenom String ,
+	  email String unique required  ,  
+}
+
+enum Motif {
+CreationMatricule, Perte
+}
+
+enum TypeDemandeur {
+  Etablissement, Enseignant, Apprenant
+ }
+ 
+entity Matiere {
+nomMatiere String ,
+reference String ,
+image AnyBlob,
+matriculeMatiere String unique,
+region NomReg  required,
+autreRegion String,
+codeRegion CodeRegion required,
+autrecodeRegion String,
+typeStructure  TypeStructure,
+autreStructure String,
+anneeAffectation Integer
+	
+}
+
+ enum TypeStructure {
+ LyceeTechnique, CentreSectoriel, CFP, CI, DA, DAGE, DI, CJ, CG, SNOP, 
+ CNID, DECPC, CPM, II, BCC, BCOM, DFPT, DRH, BC, CEP, BAD, Autre
+ }
+ 
+entity ChefEtablissement {
+    nomPrenom String required
+    
+}
+
+entity ComptableMatiere {
+    nomPrenom String required
+  
+}
+
+entity BFPA {
+    nomPrenom String required
+}
+
+relationship OneToOne {
+    ChefEtablissement{User(login)} to User 
+    ComptableMatiere{User(login)} to User
+    BFPA{User(login)} to User
+}
+
+relationship OneToMany {
+    ChefEtablissement to Apprenant{ChefEtablissement(nomPrenom)}
+    BFPA to Etablissement{BFPA(nomPrenom)}
+    BFPA to Enseignant{BFPA(nomPrenom)}
+    ComptableMatiere to Matiere{ComptableMatiere(nomPrenom)}
+    Etablissement to Apprenant{Etablissement(typeEtab)}
+    Etablissement to Enseignant{Etablissement(typeEtab)}
+    Etablissement to Matiere{Etablissement(typeEtab)}
+    NomLycetech to Apprenant{NomLycetech(nomLycee)}
+    NomLycetech to Enseignant{NomLycetech(nomLycee)}
+    NomLycetech to Matiere{NomLycetech(nomLycee)}
+    NomCFP to Apprenant{NomCFP(nomCFP)}
+    NomCFP to Enseignant{NomCFP(nomCFP)}
+    NomCFP to Matiere{NomCFP(nomCFP)}
+    NomCFP to Etablissement{NomCFP(nomCFP)}
+    NomLycetech to Etablissement{NomLycetech(nomLycee)}
+    Etablissement to Demande{Etablissement(typeEtab)}
+    NomLycetech to Demande{NomLycetech(nomLycee)}
+    NomCFP to Demande{NomCFP(nomCFP)}
+    }
+// Set pagination options
+paginate * with pagination
+//paginate Job with pagination
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+// angularSuffix * with mySuffix

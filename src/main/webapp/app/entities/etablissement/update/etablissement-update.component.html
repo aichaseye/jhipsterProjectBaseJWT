@@ -1,0 +1,197 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-etablissement-heading" data-cy="EtablissementCreateUpdateHeading">Create or edit a Etablissement</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_matriculeEtab">Matricule Etab</label>
+          <input
+            type="text"
+            class="form-control"
+            name="matriculeEtab"
+            id="field_matriculeEtab"
+            data-cy="matriculeEtab"
+            formControlName="matriculeEtab"
+          />
+          <div
+            *ngIf="
+              editForm.get('matriculeEtab')!.invalid && (editForm.get('matriculeEtab')!.dirty || editForm.get('matriculeEtab')!.touched)
+            "
+          ></div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_typeEtab">Type Etab</label>
+          <select class="form-control" name="typeEtab" formControlName="typeEtab" id="field_typeEtab" data-cy="typeEtab">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let typeEtab of typeEtabValues" [value]="typeEtab">typeEtab</option>
+          </select>
+          <div *ngIf="editForm.get('typeEtab')!.invalid && (editForm.get('typeEtab')!.dirty || editForm.get('typeEtab')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('typeEtab')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_autrenomEtab">Autrenom Etab</label>
+          <input
+            type="text"
+            class="form-control"
+            name="autrenomEtab"
+            id="field_autrenomEtab"
+            data-cy="autrenomEtab"
+            formControlName="autrenomEtab"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_anneeCre">Annee Cre</label>
+          <input type="number" class="form-control" name="anneeCre" id="field_anneeCre" data-cy="anneeCre" formControlName="anneeCre" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_statut">Statut</label>
+          <select class="form-control" name="statut" formControlName="statut" id="field_statut" data-cy="statut">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let statutEtab of statutEtabValues" [value]="statutEtab">statutEtab</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_region">Region</label>
+          <select class="form-control" name="region" formControlName="region" id="field_region" data-cy="region">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let nomReg of nomRegValues" [value]="nomReg">nomReg</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_autreRegion">Autre Region</label>
+          <input
+            type="text"
+            class="form-control"
+            name="autreRegion"
+            id="field_autreRegion"
+            data-cy="autreRegion"
+            formControlName="autreRegion"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_departement">Departement</label>
+          <select class="form-control" name="departement" formControlName="departement" id="field_departement" data-cy="departement">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let nomDep of nomDepValues" [value]="nomDep">nomDep</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_autreDep">Autre Dep</label>
+          <input type="text" class="form-control" name="autreDep" id="field_autreDep" data-cy="autreDep" formControlName="autreDep" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_commune">Commune</label>
+          <input type="text" class="form-control" name="commune" id="field_commune" data-cy="commune" formControlName="commune" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_codeRegion">Code Region</label>
+          <select class="form-control" name="codeRegion" formControlName="codeRegion" id="field_codeRegion" data-cy="codeRegion">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let codeRegion of codeRegionValues" [value]="codeRegion">codeRegion</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_autrecodeRegion">Autrecode Region</label>
+          <input
+            type="text"
+            class="form-control"
+            name="autrecodeRegion"
+            id="field_autrecodeRegion"
+            data-cy="autrecodeRegion"
+            formControlName="autrecodeRegion"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_emailEtab">Email Etab</label>
+          <input type="text" class="form-control" name="emailEtab" id="field_emailEtab" data-cy="emailEtab" formControlName="emailEtab" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_typeInsp">Type Insp</label>
+          <select class="form-control" name="typeInsp" formControlName="typeInsp" id="field_typeInsp" data-cy="typeInsp">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let typeInspection of typeInspectionValues" [value]="typeInspection">typeInspection</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_bFPA">B FPA</label>
+          <select class="form-control" id="field_bFPA" data-cy="bFPA" name="bFPA" formControlName="bFPA">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="bFPAOption.id === editForm.get('bFPA')!.value?.id ? editForm.get('bFPA')!.value : bFPAOption"
+              *ngFor="let bFPAOption of bFPASSharedCollection; trackBy: trackBFPAById"
+            >
+              {{ bFPAOption.nomPrenom }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nomCFP">Nom CFP</label>
+          <select class="form-control" id="field_nomCFP" data-cy="nomCFP" name="nomCFP" formControlName="nomCFP">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="nomCFPOption.id === editForm.get('nomCFP')!.value?.id ? editForm.get('nomCFP')!.value : nomCFPOption"
+              *ngFor="let nomCFPOption of nomCFPSSharedCollection; trackBy: trackNomCFPById"
+            >
+              {{ nomCFPOption.nomCFP }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nomLycetech">Nom Lycetech</label>
+          <select class="form-control" id="field_nomLycetech" data-cy="nomLycetech" name="nomLycetech" formControlName="nomLycetech">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                nomLycetechOption.id === editForm.get('nomLycetech')!.value?.id ? editForm.get('nomLycetech')!.value : nomLycetechOption
+              "
+              *ngFor="let nomLycetechOption of nomLycetechesSharedCollection; trackBy: trackNomLycetechById"
+            >
+              {{ nomLycetechOption.nomLycee }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

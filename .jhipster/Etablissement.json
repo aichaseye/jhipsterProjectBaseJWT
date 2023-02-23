@@ -1,0 +1,127 @@
+{
+  "applications": "*",
+  "changelogDate": "20230223195531",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "etablissement",
+  "fields": [
+    {
+      "fieldName": "matriculeEtab",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "typeEtab",
+      "fieldType": "TypeEtab",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LyceeTechnique,CFP"
+    },
+    {
+      "fieldName": "autrenomEtab",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "anneeCre",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutEtab",
+      "fieldValues": "Prive,Public,Mixte"
+    },
+    {
+      "fieldName": "region",
+      "fieldType": "NomReg",
+      "fieldValues": "DAKAR,DIOURBEL,FATICK,KAFFRINE,KAOLACK,KEDOUGOU,KOLDA,LOUGA,MATAM,SAINT_LOUIS,SEDHIOU,TAMBACOUNDA,THIES,ZIGINCHOR,AUTRE"
+    },
+    {
+      "fieldName": "autreRegion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "departement",
+      "fieldType": "NomDep",
+      "fieldValues": "Dakar,Pikine,Rufisque,Guediawaye,Keur_Massar,Thies,Mbour,Tivaoune,Saint_Louis,Dagana,Podor,Diourbel,Mbacke,Bambey,Louga,Linguere,Kebemer,Fatick,Foundiougne,Gossas,Kaffrine,Birkelane,Koungheul,Malem_Hodar,Kaolack,Guinguineo,Nioro_du_Rip,Matam,Kanel,Ranerou,Tambacounda,Bakel,Goudiry,Koumpentoum,Kedougou,Salemata,Saraya,Kolda,Velingara,Medina_Yoro_Foulah,Sedhiou,Bounkiling,Goudomp,Ziguinchor,Bignona,Oussouye,Autre"
+    },
+    {
+      "fieldName": "autreDep",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "commune",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeRegion",
+      "fieldType": "CodeRegion",
+      "fieldValues": "C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12,C13,C14,Autres"
+    },
+    {
+      "fieldName": "autrecodeRegion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailEtab",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeInsp",
+      "fieldType": "TypeInspection",
+      "fieldTypeJavadoc": "not an ignored comment",
+      "fieldValues": "IA,IEF"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Etablissement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "apprenant",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "apprenant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enseignant",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "enseignant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "matiere",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "matiere",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "demande",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "demande",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nomPrenom",
+      "otherEntityName": "bFPA",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "bFPA",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomCFP",
+      "otherEntityName": "nomCFP",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "nomCFP",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomLycee",
+      "otherEntityName": "nomLycetech",
+      "otherEntityRelationshipName": "etablissement",
+      "relationshipName": "nomLycetech",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

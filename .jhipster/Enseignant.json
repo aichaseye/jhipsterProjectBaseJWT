@@ -1,0 +1,100 @@
+{
+  "applications": "*",
+  "changelogDate": "20230223195534",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "enseignant",
+  "fields": [
+    {
+      "fieldName": "matriculeEns",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numCI",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "anneeDentree",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "region",
+      "fieldType": "NomReg",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DAKAR,DIOURBEL,FATICK,KAFFRINE,KAOLACK,KEDOUGOU,KOLDA,LOUGA,MATAM,SAINT_LOUIS,SEDHIOU,TAMBACOUNDA,THIES,ZIGINCHOR,AUTRE"
+    },
+    {
+      "fieldName": "autreRegion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeRegion",
+      "fieldType": "CodeRegion",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12,C13,C14,Autres"
+    },
+    {
+      "fieldName": "autrecodeRegion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValues": "M,F"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Enseignant",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nomPrenom",
+      "otherEntityName": "bFPA",
+      "otherEntityRelationshipName": "enseignant",
+      "relationshipName": "bFPA",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "typeEtab",
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "enseignant",
+      "relationshipName": "etablissement",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomLycee",
+      "otherEntityName": "nomLycetech",
+      "otherEntityRelationshipName": "enseignant",
+      "relationshipName": "nomLycetech",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomCFP",
+      "otherEntityName": "nomCFP",
+      "otherEntityRelationshipName": "enseignant",
+      "relationshipName": "nomCFP",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

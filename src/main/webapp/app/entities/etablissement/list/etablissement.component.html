@@ -1,0 +1,140 @@
+<div>
+  <h2 id="page-heading" data-cy="EtablissementHeading">
+    <span>Etablissements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-etablissement"
+        [routerLink]="['/etablissement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Etablissement </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="etablissements?.length === 0">
+    <span>No etablissements found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="etablissements && etablissements.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="matriculeEtab"><span>Matricule Etab</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="typeEtab"><span>Type Etab</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="autrenomEtab"><span>Autrenom Etab</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="anneeCre"><span>Annee Cre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="statut"><span>Statut</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="region"><span>Region</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="autreRegion"><span>Autre Region</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="departement"><span>Departement</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="autreDep"><span>Autre Dep</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="commune"><span>Commune</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="codeRegion"><span>Code Region</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="autrecodeRegion"><span>Autrecode Region</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="emailEtab"><span>Email Etab</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="typeInsp"><span>Type Insp</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="bFPA.nomPrenom"><span>B FPA</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nomCFP.nomCFP"><span>Nom CFP</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nomLycetech.nomLycee"><span>Nom Lycetech</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etablissement of etablissements; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/etablissement', etablissement.id, 'view']">{{ etablissement.id }}</a>
+          </td>
+          <td>{{ etablissement.matriculeEtab }}</td>
+          <td>{{ etablissement.typeEtab }}</td>
+          <td>{{ etablissement.autrenomEtab }}</td>
+          <td>{{ etablissement.anneeCre }}</td>
+          <td>{{ etablissement.statut }}</td>
+          <td>{{ etablissement.region }}</td>
+          <td>{{ etablissement.autreRegion }}</td>
+          <td>{{ etablissement.departement }}</td>
+          <td>{{ etablissement.autreDep }}</td>
+          <td>{{ etablissement.commune }}</td>
+          <td>{{ etablissement.codeRegion }}</td>
+          <td>{{ etablissement.autrecodeRegion }}</td>
+          <td>{{ etablissement.emailEtab }}</td>
+          <td>{{ etablissement.typeInsp }}</td>
+          <td>
+            <div *ngIf="etablissement.bFPA">
+              <a [routerLink]="['/bfpa', etablissement.bFPA?.id, 'view']">{{ etablissement.bFPA?.nomPrenom }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="etablissement.nomCFP">
+              <a [routerLink]="['/nom-cfp', etablissement.nomCFP?.id, 'view']">{{ etablissement.nomCFP?.nomCFP }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="etablissement.nomLycetech">
+              <a [routerLink]="['/nom-lycetech', etablissement.nomLycetech?.id, 'view']">{{ etablissement.nomLycetech?.nomLycee }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/etablissement', etablissement.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/etablissement', etablissement.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(etablissement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="etablissements && etablissements.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

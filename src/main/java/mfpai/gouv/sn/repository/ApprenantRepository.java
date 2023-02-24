@@ -41,4 +41,8 @@ public interface ApprenantRepository extends JpaRepository<Apprenant, Long> {
         "select apprenant from Apprenant apprenant left join fetch apprenant.chefEtablissement left join fetch apprenant.etablissement left join fetch apprenant.nomLycetech left join fetch apprenant.nomCFP where apprenant.id =:id"
     )
     Optional<Apprenant> findOneWithToOneRelationships(@Param("id") Long id);
+
+    // recuperer le dernier ID
+    @Query(value = "select max(id)from Apprenant")
+    public Long findOneByIdDesc();
 }

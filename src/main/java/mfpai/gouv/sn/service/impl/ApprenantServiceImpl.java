@@ -1,7 +1,9 @@
 package mfpai.gouv.sn.service.impl;
 
+import java.util.Calendar;
 import java.util.Optional;
 import mfpai.gouv.sn.domain.Apprenant;
+import mfpai.gouv.sn.domain.enumeration.Sexe;
 import mfpai.gouv.sn.repository.ApprenantRepository;
 import mfpai.gouv.sn.service.ApprenantService;
 import org.slf4j.Logger;
@@ -29,7 +31,77 @@ public class ApprenantServiceImpl implements ApprenantService {
     @Override
     public Apprenant save(Apprenant apprenant) {
         log.debug("Request to save Apprenant : {}", apprenant);
+        String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        year = year.substring(year.length() - 2);
+        // Long last_insert=(long) (new Random().nextInt(100)+2000);
+        Long last_insert = apprenantRepository.findOneByIdDesc();
+        if (last_insert == null) {
+            last_insert = 1L;
+        }
+
+        String order = getOrder(String.valueOf(last_insert));
+
+        int sexe = 5;
+
+        if (apprenant.getSexe().equals(Sexe.F)) {
+            sexe = 4;
+        }
+        String matricule = year + sexe + order;
+        //calcule de checksum (differance de la somme des valeurs du matricule de position paire et impaire)
+        int sPaire = 0;
+        int sImpaire = 0;
+        int diff = 0;
+        String lettre = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        for (int i = 0; i < matricule.length(); i++) {
+            // convertire la chaine matricule en caractere puis en int
+            char ch = matricule.charAt(i);
+            int c = Character.getNumericValue(ch);
+            // somme des valeur d'indice pair et impaire
+            if (i % 2 == 0) {
+                sPaire = sPaire + c;
+            } else sImpaire = sImpaire + c;
+            // differance
+            diff = sPaire - sImpaire;
+            if (sPaire < sImpaire) {
+                diff = -diff;
+            } else if (sPaire == sImpaire) {
+                diff = 1;
+            } else if (diff > 26) {
+                diff = 26;
+            }
+        }
+        char l = lettre.charAt(diff - 1);
+        matricule = matricule + l;
+
+        // ne pas pouvoir modifier le matricule
+        if (apprenant.getMatriculeApp() == null) apprenant.setMatriculeApp(matricule);
+
         return apprenantRepository.save(apprenant);
+    }
+
+    @Override
+    public Long findOneByIdDesc() {
+        return apprenantRepository.findOneByIdDesc();
+    }
+
+    public String getOrder(String id) {
+        String order;
+
+        if (id.length() == 1) {
+            order = "0000" + id;
+        } else if (id.length() == 2) {
+            order = "000" + id;
+        } else if (id.length() == 3) {
+            order = "00" + id;
+        } else if (id.length() == 4) {
+            order = "0" + id;
+        } else if (id.length() == 5) {
+            order = id;
+        } else {
+            order = id.substring(0, 5);
+        }
+        return order;
     }
 
     @Override
@@ -86,4 +158,9 @@ public class ApprenantServiceImpl implements ApprenantService {
         log.debug("Request to delete Apprenant : {}", id);
         apprenantRepository.deleteById(id);
     }
+    // @Override
+    // public Long findOneByIdDesc() {
+
+    //     throw new UnsupportedOperationException("Unimplemented method 'findOneByIdDesc'");
+    // }
 }
